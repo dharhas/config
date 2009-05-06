@@ -111,7 +111,7 @@
 
 
 ;;; NXML-mode
-(load "~/.emacs.d/nxml-mode-20041004/rng-auto.el")
+(load-library "rng-auto.el")
 (setq auto-mode-alist
       (cons '("\\.\\(xml\\|xsl\\|\\|xhtml\\)\\'" . nxml-mode)
 	    auto-mode-alist))
