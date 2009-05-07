@@ -20,7 +20,7 @@
 (windmove-default-bindings 'shift)
 
 ;;; Don't make me type yes or no
-(defalias 'yes-or-no-p 'y-or-no-p)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Use control-arrow keys for window resizing
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
