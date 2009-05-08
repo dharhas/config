@@ -16,12 +16,14 @@
 ;;; Indent 4 spaces
 (setq custom-buffer-indent 4)
 
-;;; Windmove: change windows with shift + arrow
-(windmove-default-bindings 'shift)
-
 ;;; Don't make me type yes or no
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;;; Windmove: change windows with shift + arrow
+(windmove-default-keybindings 'shift)
 
 ;; Use control-arrow keys for window resizing
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
+(global-set-key (kbd "<C-down>") 'enlarge-window)
+(global-set-key (kbd "<C-up>") 'shrink-window)
