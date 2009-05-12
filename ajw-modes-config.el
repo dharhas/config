@@ -3,6 +3,10 @@
 (require 'psvn)
 
 
+;;; nav mode; also look into speedbar for use on windowed systems
+(require 'nav)
+
+
 
 ;;; js2-mode
 (autoload 'js2-mode "js2" nil t)
