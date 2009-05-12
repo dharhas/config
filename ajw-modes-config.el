@@ -1,3 +1,5 @@
+;;; TODO: CLEAN THIS UP!!!
+
 
 ;;; psvn.el (subversion)
 (require 'psvn)
@@ -6,6 +8,13 @@
 ;;; nav mode; also look into speedbar for use on windowed systems
 (require 'nav)
 
+
+;;; uniquify makes duplicate buffer names something useful, rather than buffername<n>
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator "|")
+(setq uniquify-after-kill-buffer-p t)
+(setq uniquify-ignore-buffers-re "^\\*")
 
 
 ;;; js2-mode
