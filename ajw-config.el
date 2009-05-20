@@ -62,3 +62,12 @@
 
 ;;; Don't need to see splash screen
 (setq inhibit-startup-message t)
+
+;;; Don't line wrap
+(setq-default truncate-lines t)
+
+;;; No blink cursor mode
+(blink-cursor-mode 'nil)
+
+;;; Save hist mode.. see how this goes
+(savehist-mode t)
