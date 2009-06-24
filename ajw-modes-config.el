@@ -89,14 +89,43 @@
 
 
 
-
 ;;; Org mode
+(require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 
 
+;;; Hiding leading stars for cleaner appearance
+(setq org-hide-leading-stars t)
+
+;;; Will need to re-align a few files so figure out how to do this
+;;; before making it permanent
+(setq org-odd-levels-only t)
+
+
+;(setq org-todo-keywords
+;       '((sequence "TODO" "STARTED" "WAITING" "|" "DONE" "CANCELLED")))
+
+(setq org-todo-keywords (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
+				(sequence "WAITING(w@/!)" "|" "CANCELLED(c@/!)"))))
+
+
+(setq org-todo-keyword-faces (quote (("TODO" :foreground "pink" :weight bold)
+				     ("STARTED" :foreground "orange" :weight bold)
+				     ("DONE" :foreground "green" :weight bold)
+				     ("WAITING" :foreground "yellow" :weight bold)
+				     ("CANCELLED" :foreground "green" :weight bold))))
+
+
+
+;;; Don't do wacky things in headlines
+(setq org-special-ctrl-k t)
+
+;;; Ido is nice
+(setq org-completion-use-ido t)
+(setq org-cycle-separator-lines 2)
 
 
 ;;; Notes on Ido and Icicles
