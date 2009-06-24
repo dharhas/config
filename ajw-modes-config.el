@@ -63,6 +63,7 @@
 ;; ipython-command is now in OS-specific file
 ;; should also put py-python-command-args?
 ;(setq ipython-command "c:\\Python25\\Scripts\\ipython")
+(setq ipython-command "ipython")
 (setq py-python-command-args '("-pylab" "-wthread" "-colors" "Linux" "-automagic"))
 (eval-after-load "python-mode"
  '(progn
@@ -71,18 +72,18 @@
 
 
 ;;; Pymacs
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
+;(autoload 'pymacs-apply "pymacs")
+;(autoload 'pymacs-call "pymacs")
+;(autoload 'pymacs-eval "pymacs" nil t)
+;(autoload 'pymacs-exec "pymacs" nil t)
+;(autoload 'pymacs-load "pymacs" nil t)
 
 
 ;;; Ropemacs
-(eval-after-load "python-mode"
-  '(progn
-    (pymacs-load "ropemacs" "rope-")
-  ))
+;(eval-after-load "python-mode"
+;  '(progn
+;    (pymacs-load "ropemacs" "rope-")
+;  ))
 
 
 

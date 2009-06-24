@@ -71,3 +71,10 @@
 
 ;;; Save hist mode.. see how this goes
 (savehist-mode t)
+
+;;; Show column numbers
+(column-number-mode t)
+
+;;; Show parenthesis in a helpful manner
+(show-paren-mode t)
+(setq show-paren-style 'expression)
