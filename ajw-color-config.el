@@ -1,9 +1,13 @@
 ;;; Color theme it...
 (require 'color-theme)
 (color-theme-initialize)
-(if window-system
-    (color-theme-tango)
-    (color-theme-clarity))
 
-;;; Taylor is a beautiful theme but it fargles up the bold - this fixes that
-;(set-face-background 'bold "unspecified") 
+;;; If on X, use Tango 
+;;; If on Windows, use Taylor
+;;; If on console/tty, use clarity
+(if window-system
+    (if (eq system-type 'windows-nt) 
+	(list (color-theme-taylor)
+	      (set-face-background 'bold "unspecified"))
+     (color-theme-tango))
+    (color-theme-clarity))

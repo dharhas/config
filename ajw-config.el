@@ -32,6 +32,9 @@
 
 ;; Variables
 
+;;; Use spaces rather than tabs
+(setq-default indent-tabs-mode nil)
+
 ;;; Indent 4 spaces
 (setq custom-buffer-indent 4)
 
@@ -77,4 +80,5 @@
 
 ;;; Show parenthesis in a helpful manner
 (show-paren-mode t)
-(setq show-paren-style 'expression)
+(setq show-paren-style 'mixed)
+

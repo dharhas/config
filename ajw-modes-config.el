@@ -19,6 +19,7 @@
 
 ;;; js2-mode
 (autoload 'js2-mode "js2" nil t)
+(setq js2-basic-offset 4)
 (add-to-list 'auto-mode-alist '("\\js$" . js2-mode))
 
 
@@ -119,6 +120,22 @@
 				     ("CANCELLED" :foreground "green" :weight bold))))
 
 
+; Tags with fast selection keys
+(setq org-tag-alist (quote ((:startgroup)
+                            ("@Work" . ?w)
+                            ("@Home" . ?h)
+                            (:endgroup)
+			    (:startgroup)
+                            ("@GIS" . ?g)
+                            ("@NOC" . ?n)
+                            (:endgroup)
+                            ("FARM" . ?F)
+                            ("HOME" . ?H)
+                            ("CANCELLED" . ?C))))
+
+; Allow setting single tags without the menu
+(setq org-fast-tag-selection-single-key (quote expert))
+
 
 ;;; Don't do wacky things in headlines
 (setq org-special-ctrl-k t)
@@ -126,6 +143,12 @@
 ;;; Ido is nice
 (setq org-completion-use-ido t)
 (setq org-cycle-separator-lines 2)
+
+; Set default column view headings: Task Effort Clock_Summary
+(setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
+
+; global Effort estimate values
+(setq org-global-properties (quote (("Effort_ALL" . "0:10 0:30 1:00 2:00 3:00 4:00 5:00 6:00 8:00"))))
 
 
 ;;; Notes on Ido and Icicles
