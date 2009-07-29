@@ -73,18 +73,18 @@
 
 
 ;;; Pymacs
-;(autoload 'pymacs-apply "pymacs")
-;(autoload 'pymacs-call "pymacs")
-;(autoload 'pymacs-eval "pymacs" nil t)
-;(autoload 'pymacs-exec "pymacs" nil t)
-;(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
 
 
 ;;; Ropemacs
-;(eval-after-load "python-mode"
-;  '(progn
-;    (pymacs-load "ropemacs" "rope-")
-;  ))
+(eval-after-load "python-mode"
+  '(progn
+    (pymacs-load "ropemacs" "rope-")
+  ))
 
 
 
