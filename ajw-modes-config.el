@@ -20,6 +20,7 @@
 ;;; js2-mode
 (autoload 'js2-mode "js2" nil t)
 (setq js2-basic-offset 4)
+(setq js2-cleanup-whitespace nil) ; this can be a problem when working with OpenLayers
 (add-to-list 'auto-mode-alist '("\\js$" . js2-mode))
 
 
@@ -168,11 +169,11 @@
 ;;; Icicles 
 ;;; XXX: Icicles should get loaded last so overwrites a few key bindings
 ;;; NOTE: Icicles overwrites a few key bindings
-(require 'icicles) 
+;(require 'icicles) 
 ;(icicle-mode 1)
 ;(icomplete-mode 99)
 ;(require 'icomplete+)
-(eval-after-load "icomplete" '(progn (require 'icomplete+)))
+;(eval-after-load "icomplete" '(progn (require 'icomplete+)))
 
 
 
