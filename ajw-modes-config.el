@@ -9,6 +9,12 @@
 (require 'nav)
 
 
+;;; yasnippets
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/emacs/lisp/yasnippet-0.6.1c/snippets")
+
+
 ;;; uniquify makes duplicate buffer names something useful, rather than buffername<n>
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
@@ -22,9 +28,6 @@
 (setq js2-basic-offset 4)
 (setq js2-cleanup-whitespace nil) ; this can be a problem when working with OpenLayers
 (add-to-list 'auto-mode-alist '("\\js$" . js2-mode))
-
-
-
 
 
 ;;; XXX: figure this out some time
