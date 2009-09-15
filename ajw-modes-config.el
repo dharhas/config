@@ -12,7 +12,7 @@
 ;;; yasnippets
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/emacs/lisp/yasnippet-0.6.1c/snippets")
+(yas/load-directory "/home/wilsaj/emacs/lisp/yasnippet-0.6.1c/snippets")
 
 
 ;;; uniquify makes duplicate buffer names something useful, rather than buffername<n>
@@ -89,7 +89,6 @@
   '(progn
     (pymacs-load "ropemacs" "rope-")
   ))
-
 
 
 
