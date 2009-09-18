@@ -1,0 +1,1 @@
+${1:FIELDNAME} = models.EmailField(${2:label='Email Address'}, ${3:help_text='Enter a valid email address'}})

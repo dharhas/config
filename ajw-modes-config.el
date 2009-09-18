@@ -12,7 +12,12 @@
 ;;; yasnippets
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory (concat emacs-root "/snippets"))
+
+;;; Keep my snippets in ~/snippets/personal, but also use ~/snippets/external
+(setq yas/root-directory (list (concat emacs-root "/snippets/personal")
+                               (concat emacs-root "/snippets/external")))
+(mapc 'yas/load-directory yas/root-directory)
+
 
 
 ;;; uniquify makes duplicate buffer names something useful, rather than buffername<n>
@@ -28,6 +33,11 @@
 (setq js2-basic-offset 4)
 (setq js2-cleanup-whitespace nil) ; this can be a problem when working with OpenLayers
 (add-to-list 'auto-mode-alist '("\\js$" . js2-mode))
+
+
+;;; django-mode
+(autoload 'django-mode "django-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\html$" . django-mode))
 
 
 ;;; XXX: figure this out some time

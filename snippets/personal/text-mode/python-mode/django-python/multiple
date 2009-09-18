@@ -1,0 +1,4 @@
+class ${1:Formname}(${2:forms.Form}):
+    """${3:Form docstring}"""
+    def __init__(self, *args, **kwargs):
+        super($1, self).__init__(*args, **kwargs)
