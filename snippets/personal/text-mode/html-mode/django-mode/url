@@ -1,1 +1,1 @@
-{% url '${1:app.views.view}' %}
+{% url $1 %}

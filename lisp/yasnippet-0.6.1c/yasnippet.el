@@ -2044,19 +2044,20 @@ lurking."
         (let ((default-directory chosen)
               (name (read-from-minibuffer "Enter a snippet name: ")))
           (find-file-other-window (concat name
-                                          ".yasnippet"))
+                                          )) 
+;;; I don't care for the .yasnippet file ending
+;                                          ".yasnippet"))
           (snippet-mode)
           (unless (and choose-instead-of-guess
                        (not (y-or-n-p "Insert a snippet with useful headers? ")))
             (yas/expand-snippet (format 
+;;; my modified version of yas/new-snippet text
                                  "\
 # -*- mode: snippet -*-
-# name: %s
-# key: $1${2:
-# binding: \"${3:keybinding}\"}${4:
-# expand-env: ((${5:some-var} ${6:some-value}))}
+# key: %s
+# name: $0$1
 # --
-$0" name))))
+${1:snippet definition}" name))))
       (message "[yas] aborted snippet creation."))))
 
 (defun yas/find-snippets (&optional same-window )

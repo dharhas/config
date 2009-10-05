@@ -1,15 +1,20 @@
-class ${1:Formname}(forms.Form):
-    """${2:($1 description)}"""
-    ${3:def __init__(self, *args, **kwargs):
-         ${4:}
-         super($1, self).__init__(*args, **kwargs)}
+# -*- mode: snippet -*-
+# key: form
+# name: class ...Form = (forms.Form)
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+class ${1:Formname}Form(${2:forms.Form}):
+    """
+    ${3:Form docstring}
+    """
 
     $0
 
-    ${5:def clean_${6:fieldname}(self):
-         $7
-		return self.cleaned_data['$6']}
+    ${4:def __init__(self, *args, **kwargs):
+         super($1Form, self).__init__(*args, **kwargs)}
 
-    ${8:def clean(self):
-         $9
-         return self.cleaned_data}
+    ${5:def clean_${6:fieldname}(self):
+        return self.cleaned_data['$6']}
+
+    ${7:def clean(self):
+        return self.cleaned_data}

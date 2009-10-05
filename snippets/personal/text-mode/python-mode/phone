@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: phone
+# name: ... = us.models.PhoneNumberField(...)
+# --
+${1:FIELDNAME} = us.models.PhoneNumberField($0)
