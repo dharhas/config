@@ -40,6 +40,11 @@
 (add-to-list 'auto-mode-alist '("\\html$" . django-mode))
 
 
+;;; irfc.el
+(require 'irfc)
+;; note: will need to make a ~/.emacs.d/RFC directory for caching RFCs
+
+
 ;;; XXX: figure this out some time
 ;;; flymake-js (experimental)
 ;(require 'flymake-js)
