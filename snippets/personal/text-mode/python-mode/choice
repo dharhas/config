@@ -2,6 +2,7 @@
 # key: choice
 # name: ..._choices = (('...', '...'),)    ... = forms.ChoiceField(choices = ...)
 # --
-${1:FIELDNAME}_choices = (('${2:choice_option}', '${3:Full choice text}'),)
+${1:FIELDNAME}_choices = (('${2:choice_option}', '${3:Full choice text}'),
+                           $0)
  
 $1 = forms.ChoiceField(choices = $1_choices)

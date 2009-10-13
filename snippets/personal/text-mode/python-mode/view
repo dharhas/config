@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# key: view
+# name: def ...(request): ....
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+def ${1:view_func}(request):
+    """
+    ${2:Docstring}
+    """
+    $0

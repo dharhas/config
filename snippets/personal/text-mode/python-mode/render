@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# key: render
+# name: render_to_response('...', {...}, context_instance...}
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+return render_to_response('${1:template.html}', ${2:{
+    'request': request,
+    $0
+    }},
+    ${3:context_instance=RequestContext(request)})

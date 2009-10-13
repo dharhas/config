@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # key: form
-# name: class ...Form = (forms.Form)
+# name: class ...Form = (forms.Form): ...
 # expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
 # --
 class ${1:Formname}Form(${2:forms.Form}):

@@ -1,5 +1,13 @@
+# -*- mode: snippet -*-
+# key: model
+# name: class ... = (models.Model): ...
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
 class ${1:Modelname}(models.Model):
-    """${2:($1 description)}"""
+    """
+    ${2:Model docstring}
+    """
+
     $0
 
     ${3:class Meta:
