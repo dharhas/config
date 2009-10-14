@@ -1,7 +1,7 @@
 (defvar *emacs-load-start* (current-time))
 
 (defvar emacs-root (if (eq system-type 'windows-nt) 
-                       "c://andy/emacs"
+                       "C:/andy/emacs"
                        "/home/wilsaj/emacs")
         "My emacs home directory")
 
