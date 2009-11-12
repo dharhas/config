@@ -1,13 +1,8 @@
 ;;; TODO: CLEAN THIS UP!!!
 
 
-;;; psvn.el (subversion)
-(require 'psvn)
-
-
 ;;; nav mode; also look into speedbar for use on windowed systems
 (require 'nav)
-
 
 ;;; yasnippets
 (require 'yasnippet)
