@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# key: iset
+# name: import ipdb...    ipdb.set_trace()
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+import ipdb
+ipdb.set_trace()

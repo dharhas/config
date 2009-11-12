@@ -2,4 +2,4 @@
 # key: bool
 # name: ... = models.BooleanField(..)
 # --
-${1:FIELDNAME} = models.BooleanField(${2:default=True})
+${1:FIELDNAME} = models.BooleanField(${2:required=False})

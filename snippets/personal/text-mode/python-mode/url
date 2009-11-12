@@ -1,1 +1,1 @@
-url('${1:^$}', '${2:view_function}', name='${3:view-name}')
+url('${1:^}${3:view/}${2:$}', '${4:view_function}', name='${5:view-name}')
