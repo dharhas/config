@@ -1,5 +1,7 @@
 ;;; TODO: CLEAN THIS UP!!!
 
+;;; ahg is a really nice mercurial mode
+(require 'ahg)
 
 ;;; nav mode; also look into speedbar for use on windowed systems
 (require 'nav)
@@ -8,14 +10,16 @@
 (require 'yasnippet)
 (yas/initialize)
 
-;;; Keep my snippets in ~/snippets/personal, but also use ~/snippets/external
+;;; Keep my snippets in ~/snippets/personal, but also use
+;;; ~/snippets/external (snippets developed by other ppl)
 (setq yas/root-directory (list (concat emacs-root "/snippets/personal")
                                (concat emacs-root "/snippets/external")))
 (mapc 'yas/load-directory yas/root-directory)
 
 
 
-;;; uniquify makes duplicate buffer names something useful, rather than buffername<n>
+;;; uniquify makes duplicate buffer names something useful, rather
+;;; than buffername<n>
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
 (setq uniquify-separator "|")
@@ -26,7 +30,8 @@
 ;;; js2-mode
 (autoload 'js2-mode "js2" nil t)
 (setq js2-basic-offset 4)
-(setq js2-cleanup-whitespace nil) ; this can be a problem when working with OpenLayers
+; XXX: this can be a problem when working with OpenLayers
+(setq js2-cleanup-whitespace nil) 
 (add-to-list 'auto-mode-alist '("\\js$" . js2-mode))
 
 
