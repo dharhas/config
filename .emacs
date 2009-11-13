@@ -16,6 +16,13 @@
 
 (add-to-list 'load-path emacs-root)
 
+;;; Windows specific stuff
+(if (eq system-type 'windows-nt)
+    (load-library "ajw-winnt-config"))
+
+;;; FreeBSD specific stuff
+(if (eq system-type 'berkeley-unix)
+    (load-library "ajw-bsd-config"))
 
 ;;; General stuff - keybindings, settings, etc
 (load-library "ajw-config")
@@ -26,14 +33,14 @@
 ;;; Modes and their settings
 (load-library "ajw-modes-config")
 
-;;; Windows specific stuff
-(if (eq system-type 'windows-nt)
-    (load-library "ajw-winnt-config"))
+;;; Org mode setup
+(load-library "ajw-org-config")
 
-;;; FreeBSD specific stuff
-(if (eq system-type 'berkeley-unix)
-    (load-library "ajw-bsd-config"))
+;;; Python mode setup
+(load-library "ajw-python-config")
 
+;;; Autocomplete setup
+(load-library "ajw-autocomplete-config")
 
 ;;; Tell me how long it took, for tuning emacs configs
 (message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
