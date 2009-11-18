@@ -67,6 +67,11 @@
 (setq tramp-default-method "ssh")
 
 
+(add-hook 'MH-Letter
+	  (lambda () (flymake-mode 1)))
+
+
+
 ;;; NXML-mode
 (load-library "rng-auto.el")
 (setq auto-mode-alist
