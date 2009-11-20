@@ -17,6 +17,8 @@
 ;;; before making it permanent
 (setq org-odd-levels-only t)
 
+;;; Keep shift-arrow keys as they set for windmove
+(setq org-replace-disputed-keys t)
 
 ;(setq org-todo-keywords
 ;       '((sequence "TODO" "STARTED" "WAITING" "|" "DONE" "CANCELLED")))
