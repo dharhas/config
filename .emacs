@@ -25,7 +25,7 @@
     (load-library "ajw-bsd-config"))
 
 ;;; General stuff - keybindings, settings, etc
-(load-library "ajw-config")
+(load-library "ajw-general-config")
 
 ;;; How to make pretty
 (load-library "ajw-color-config")
