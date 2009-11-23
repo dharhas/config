@@ -50,7 +50,7 @@
 
 
 
-;; Functional / General Settings
+;; Functional / Miscellaneous General Settings
 
 ;;; Don't wastes my spaces
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -84,3 +84,7 @@
 
 ;;; Start emacs server
 (server-start)
+
+;;; Saveplace to savetime
+(require 'saveplace)
+(setq-default save-place t)
