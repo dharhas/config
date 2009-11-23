@@ -11,9 +11,14 @@
   (setq ac-dwim nil)
   
   (setq-default ac-sources '(ac-source-words-in-buffer ac-source-yasnippet))
+  
   (add-hook 'python-mode-hook
             (lambda ()
               (setq ac-sources '(ac-source-ropemacs ac-source-yasnippet )))))
+
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda ()
+              (setq ac-sources '(ac-source-emacs-lisp-features ac-source-words-in-buffer ac-source-yasnippet ))))
 
 
 ;;; swiped and modified from from enigmacurry.com (dude's name is ryan)
