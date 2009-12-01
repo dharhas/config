@@ -72,6 +72,9 @@
 ;;; No blink cursor mode
 (blink-cursor-mode 'nil)
 
+;;; Don't annoy-beep me
+(setq-default visible-bell t)
+
 ;;; Save hist mode.. see how this goes
 (savehist-mode t)
 
