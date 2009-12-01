@@ -18,7 +18,7 @@
 
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
-              (setq ac-sources '(ac-source-emacs-lisp-features ac-source-words-in-buffer ac-source-yasnippet ))))
+              (setq ac-sources '(ac-source-words-in-buffer ac-source-yasnippet ))))
 
 
 ;;; swiped and modified from from enigmacurry.com (dude's name is ryan)
@@ -33,8 +33,8 @@
 
 (add-hook 'yas/minor-mode-hook
           (lambda ()
-            (define-key yas/minor-mode-map "\t" 'try-expand-after-yasnippet)
-            (define-key yas/minor-mode-map "\t" 'yas/expand)))
+            (define-key yas/minor-mode-map "\t" 'yas/expand)
+            (define-key yas/minor-mode-map "\t" 'try-expand-after-yasnippet)))
 
 (defun try-indent ()
   "Runs indent-for-tab-command but returns t if it actually did an indent; nil otherwise"
