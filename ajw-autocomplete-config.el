@@ -33,8 +33,8 @@
 
 (add-hook 'yas/minor-mode-hook
           (lambda ()
-            (define-key yas/minor-mode-map "\t" 'yas/expand)
-            (define-key yas/minor-mode-map "\t" 'try-expand-after-yasnippet)))
+            (define-key yas/minor-mode-map "\t" 'try-expand-after-yasnippet)
+            (define-key yas/minor-mode-map "\t" 'yas/expand)))
 
 (defun try-indent ()
   "Runs indent-for-tab-command but returns t if it actually did an indent; nil otherwise"
