@@ -1,0 +1,52 @@
+! Xft settings
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.antialias: true
+Xft.rgba: rgba
+Xft.dpi: 96
+
+! Visual bell ftw
+*visualBell:       true
+*menuBackground:   #202020
+*menuForeground:   #999999
+
+
+! emacs 
+Emacs.FontBackend: xft
+Emacs.font: DejaVu Sans Mono-10
+
+! urxvt settings
+URxvt.background   : #202020
+URxvt.foreground   : #999999
+URxvt.font         : xft:Inconsolata:size=13
+URxvt.scrollBar    : False
+URxvt.pointerBlank : true
+
+URxvt.perl-ext-common : default,matcher
+URxvt.urlLauncher     : /usr/local/bin/firefox3
+URxvt.matcher.button  : 1 
+
+! black
+URxvt.color0  : #202020
+URxvt.color8  : #202020
+! red
+URxvt.color1  : #bb4444
+URxvt.color9  : #bb4444
+! green
+URxvt.color2  : #44bb44
+URxvt.color10 : #44bb44
+! yellow
+URxvt.color3  : #bbbb44
+URxvt.color11 : #bbbb44
+! blue
+URxvt.color4  : #4444aa
+URxvt.color12 : #4444aa
+! magenta
+URxvt.color5  : #bb44bb
+URxvt.color13 : #bb44bb
+! cyan
+URxvt.color6  : #44bbbb
+URxvt.color14 : #44bbbb
+! white
+URxvt.color7  : #999999
+URxvt.color15 : #999999
