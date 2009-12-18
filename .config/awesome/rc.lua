@@ -24,6 +24,7 @@ beautiful.init(awful.util.getdir("config") .. "/zenburn.lua")
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
 terminal = "urxvt"
+screenlocker = "slock"
 editor = os.getenv("EDITOR") or "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -267,7 +268,10 @@ globalkeys = awful.util.table.join(
                   promptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end)
+              end),
+
+    -- Screen lock
+    awful.key({ altkey, "Control" }, "l", function () awful.util.spawn( screenlocker ) end)
 )
 
 
