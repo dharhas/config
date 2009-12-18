@@ -7,15 +7,21 @@ require("beautiful")
 -- Notification library
 require("naughty")
 --- Widget library
---require("vicious")
+require("vicious")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/local/share/awesome/themes/zenburn/theme.lua")
+-- Zenburn is a good theme
+theme_path = "/usr/local/share/awesome/themes/zenburn/theme.lua"
+
+-- Actually load theme
+beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
+browser = "firefox"
 terminal = "urxvt"
-editor = os.getenv("EDITOR") or "nano"
+screenlocker = "slock"
+editor = os.getenv("EDITOR") or "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -34,8 +40,6 @@ layouts =
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
@@ -43,19 +47,18 @@ layouts =
 }
 -- }}}
 
--- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-     names = {"emacs", "mail", "local", "extern", "web", 6, 7},
-     layout = {layouts[10], layouts[10], layouts[11], layouts[11], layouts[12]}
+    names =  {"emacs", "mail", "local", "extern", "www", 6, 7},
+    layout = {awful.layout.suit.max.fullscreen, awful.layout.suit.max.fullscreen, awful.layout.suit.magnifier, awful.layout.suit.magnifier, awful.layout.suit.floating}
 }
 
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
---   tags[s] = awful.tag(tags.names, s, tags.layout)
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, awful.layout.suit.tile)
+   -- Each screen has its own tag table.
+  tags[s] = awful.tag(tags.names, s, tags.layout)
 end
 -- }}}
+
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -78,6 +81,11 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
+
+-- Initialize widget
+datewidget = widget({ type = "textbox" })
+-- Register widget
+vicious.register(datewidget, vicious.widgets.date, "%b %d, %R", 60)
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -151,12 +159,13 @@ for s = 1, screen.count() do
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
-        mytextclock,
+--        mytextclock,
+        datewidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
-end
+ end
 -- }}}
 
 -- {{{ Mouse bindings
@@ -183,7 +192,6 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show(true)        end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -222,8 +230,12 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end)
+              end),
+
+    -- Lock screen
+    awful.key({ modkey, "Alt" }, "F12", function () awful.util.spawn(screenlocker) end)
 )
+
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
@@ -290,22 +302,15 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 awful.rules.rules = {
-    -- All clients will match this rule.
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
+    { rule = { }, 
+      properties = {
+         focus = true,
+         keys  = clientkeys,
+         buttons = clientbuttons,
+         border_width = beautiful.border_width,
+         border_color = beautiful.border_normal } },
+    { rule = { class = "Firefox" },
+      properties = { tag = tags[1][5] } },
 }
 -- }}}
 

@@ -41,6 +41,8 @@ layouts =
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
@@ -48,16 +50,48 @@ layouts =
 }
 -- }}}
 
--- Define a tag table which hold all screen tags.
-tags = {
-    names =  {"emacs", "mail", "local", "extern", "web", 6, 7},
-    layout = {awful.layout.suit.max.fullscreen, awful.layout.suit.max.fullscreen, awful.layout.suit.magnifier, awful.layout.suit.magnifier, awful.layout.suit.floating}
+-- {{{ Shifty Tags
+
+shifty.config.tags = {
+---XXX: add layouts
+ ["1:emacs"] = { init = true, position = 1, screen = 1                                },
+  ["5:mail"] = { init = true, position = 5, screen = 1                                },
+  ["3:term"] = { init = true, persist = true, position = 3                            },
+   ["4:www"] = { exclusive = true, max_clients = 1, position = 4, spawn = browser     },
 }
 
-for s = 1, screen.count() do
-   -- Each screen has its own tag table.
-  tags[s] = awful.tag(tags.names, s, tags.layout)
-end
+shifty.config.apps = {
+        { match = { terminal                        }, tag = "3:term",       screen = 1,     },
+        { match = {"Iceweasel.*", "Firefox.*"       }, tag = "4:www",                        },
+        { match = {"Gimp","Ufraw"                   }, tag = { "graph", "gimp" }             },
+        { match = {"gimp%-image%-window"            }, slave = true,                         },
+        { match = {"gqview"                         }, tag = { "graph", "gqview" }           },
+        { match = {"gcolor2", "xmag"                }, intrusive = true,                     },
+        { match = {"gcolor2"                        }, geometry = { 100,100,nil,nil },       },
+        { match = { "" }, buttons = {
+                             button({ }, 1, function (c) client.focus = c; c:raise() end),
+                             button({ modkey }, 1, function (c) awful.mouse.client.move() end),
+                             button({ modkey }, 3, awful.mouse.client.resize ), }, },
+}
+
+shifty.config.defaults = {
+  layout = "max", 
+  run = function(tag) naughty.notify({ text = tag.name }) end,
+}
+
+shifty.init()
+
+
+-- Define a tag table which hold all screen tags.
+-- tags = {
+--     names = {"emacs", "mail", "local", "extern", "web", 6, 7},
+--     layout = {layouts[10], layouts[10], layouts[11], layouts[11], layouts[12]}
+-- }
+
+-- for s = 1, screen.count() do
+--    -- Each screen has its own tag table.
+--   tags[s] = awful.tag(tags.names, s, tags.layout)
+-- end
 -- }}}
 
 
@@ -167,6 +201,7 @@ for s = 1, screen.count() do
         layout = awful.widget.layout.horizontal.rightleft
     }
  end
+shifty.taglist = mytaglist
 -- }}}
 
 -- {{{ Mouse bindings
@@ -183,6 +218,29 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
+    -- SHIFTY: keybindings specific to shifty
+    awful.key({                  }, "XF86Back",    awful.tag.viewprev),
+    awful.key({                  }, "XF86Forward", awful.tag.viewnext),
+    awful.key({ modkey           }, "XF86Back",    shifty.shift_prev),
+    awful.key({ modkey           }, "XF86Forward", shifty.shift_next),
+    awful.key({ modkey           }, "t",           function() shifty.add({ rel_index = 1 }) end),
+    awful.key({ modkey,"Control" }, "t",           function() shifty.add({ rel_index = 1, nopopup = true }) end),
+    awful.key({ modkey           }, "r",           shifty.rename),
+    awful.key({ modkey           }, "w",           shifty.del),
+    awful.key({ modkey, "Shift"  }, "d", shifty.del),      -- delete a tag
+    awful.key({ modkey, "Shift"  }, "n", shifty.send_prev),-- move client to prev tag
+    awful.key({ modkey           }, "n", shifty.send_next),-- move client to next tag
+    awful.key({ modkey,"Control" }, "n",                   -- move client to next tag
+        function() 
+           shifty.tagtoscr(awful.util.cycle(screen.count(), mouse.screen +1))
+        end),
+    awful.key({ modkey          }, "a",     shifty.add),  -- creat a new tag
+    awful.key({ modkey,         }, "q",  shifty.rename),  -- rename a tag
+    awful.key({ modkey, "Shift" }, "a",                   -- nopopup new tag
+       function() 
+          shifty.add({ nopopup = true }) 
+       end),
+
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
@@ -193,7 +251,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show(true)        end),
+--    awful.key({ modkey,           }, "w", function () mymainmenu:show(true)        end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -235,6 +293,35 @@ globalkeys = awful.util.table.join(
               end)
 )
 
+-- {{{ bindings / global / shifty.getpos
+for i=1, ( shifty.config.maxtags or 9 ) do
+  
+  globalkeys = awful.util.table.join(globalkeys, awful.key({ modkey }, i,
+  function ()
+    local t = awful.tag.viewonly(shifty.getpos(i))
+  end))
+  globalkeys = awful.util.table.join(globalkeys, awful.key({ modkey, "Control" }, i,
+  function ()
+    local t = shifty.getpos(i)
+    t.selected = not t.selected
+  end))
+  globalkeys = awful.util.table.join(globalkeys, awful.key({ modkey, "Control", "Shift" }, i,
+  function ()
+    if client.focus then
+      awful.client.toggletag(shifty.getpos(i))
+    end
+  end))
+  -- move clients to other tags
+  globalkeys = awful.util.table.join(globalkeys, awful.key({ modkey, "Shift" }, i,
+    function ()
+      if client.focus then
+        local t = shifty.getpos(i)
+        awful.client.movetotag(t)
+        awful.tag.viewonly(t)
+      end
+    end))
+end
+-- }}}
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
@@ -256,54 +343,10 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
--- {{{ Keyboard digits
-local keynumber = 0
-for s = 1, screen.count() do
-   keynumber = math.min(9, math.max(#tags[s], keynumber));
-end
--- }}}
-
--- {{{ Tag controls
-for i = 1, keynumber do
-    globalkeys = awful.util.table.join( globalkeys,
-        awful.key({ modkey }, "#" .. i + 9, function ()
-            local screen = mouse.screen
-            if tags[screen][i] then awful.tag.viewonly(tags[screen][i]) end
-        end),
-        awful.key({ modkey, "Control" }, "#" .. i + 9, function ()
-            local screen = mouse.screen
-            if tags[screen][i] then awful.tag.viewtoggle(tags[screen][i]) end
-        end),
-        awful.key({ modkey, "Shift" }, "#" .. i + 9, function ()
-            if client.focus and tags[client.focus.screen][i] then
-                awful.client.movetotag(tags[client.focus.screen][i])
-            end
-        end),
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9, function ()
-            if client.focus and tags[client.focus.screen][i] then
-                awful.client.toggletag(tags[client.focus.screen][i])
-            end
-        end))
-end
--- }}}
-
-
 -- Set keys
 root.keys(globalkeys)
--- }}}
-
--- {{{ Rules
-awful.rules.rules = {
-    { rule = { }, properties = {
-      focus = true,
-      keys  = clientkeys,
-      buttons = clientbuttons,
-      border_width = beautiful.border_width,
-      border_color = beautiful.border_normal }
-    },
-    { rule = { class = "Firefox" },
-      properties = { tag = tags[1][3] } },
-}
+shifty.config.globalkeys = globalkeys
+shifty.config.clientkeys = clientkeys
 -- }}}
 
 -- {{{ Signals
@@ -336,3 +379,56 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+
+-- {{{ Hooks
+-- Hook function to execute when focusing a client.
+awful.hooks.focus.register(function (c)
+    if not awful.client.ismarked(c) then
+        c.border_color = beautiful.border_focus
+    end
+end)
+
+-- Hook function to execute when unfocusing a client.
+awful.hooks.unfocus.register(function (c)
+    if not awful.client.ismarked(c) then
+        c.border_color = beautiful.border_normal
+    end
+end)
+
+-- Hook function to execute when marking a client
+awful.hooks.marked.register(function (c)
+    c.border_color = beautiful.border_marked
+end)
+
+-- Hook function to execute when unmarking a client.
+awful.hooks.unmarked.register(function (c)
+    c.border_color = beautiful.border_focus
+end)
+
+-- Hook function to execute when the mouse enters a client.
+awful.hooks.mouse_enter.register(function (c)
+    -- Sloppy focus, but disabled for magnifier layout
+    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+        and awful.client.focus.filter(c) then
+        client.focus = c
+    end
+end)
+
+-- Hook function to execute when arranging the screen.
+-- (tag switch, new client, etc)
+awful.hooks.arrange.register(function (screen)
+    local layout = awful.layout.getname(awful.layout.get(screen))
+    if layout and beautiful["layout_" ..layout] then
+        mylayoutbox[screen].image = image(beautiful["layout_" .. layout])
+    else
+        mylayoutbox[screen].image = nil
+    end
+
+    -- Give focus to the latest client in history if no window has focus
+    -- or if the current window is a desktop or a dock one.
+    if not client.focus then
+        local c = awful.client.focus.history.get(screen, 0)
+        if c then client.focus = c end
+    end
+end)
