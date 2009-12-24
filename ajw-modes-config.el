@@ -34,6 +34,10 @@
 (add-to-list 'auto-mode-alist '("\\html$" . django-mode))
 
 
+;; lua mode
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+
 ;;; irfc.el
 (require 'irfc)
 ;; note: will need to make a ~/.emacs.d/RFC directory for caching RFCs
