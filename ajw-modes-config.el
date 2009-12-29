@@ -28,6 +28,10 @@
 (setq uniquify-ignore-buffers-re "^\\*")
 
 
+;;; sh mode
+(setq sh-learn-basic-offset "guess")
+(add-hook 'sh-set-shell-hook 'sh-learn-buffer-indent)
+
 
 ;;; django-mode
 (autoload 'django-mode "django-mode" nil t)
@@ -73,6 +77,7 @@
 (setq tramp-default-method "ssh")
 
 
+;;; MH-E mode
 (add-hook 'MH-Letter
 	  (lambda () (flymake-mode 1)))
 
