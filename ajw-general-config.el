@@ -47,7 +47,11 @@
 ;;; Don't clutter up directories with backup files 
 (push '("." . "~/.emacs-backups") backup-directory-alist)
 
-
+;;; Split windows horizontally when creating a new one if the current
+;;; buffer is wide enough - on most monitors that means there will be
+;;; two vertical windows max
+(setq split-height-threshold 999)
+(setq split-width-threshold 120)
 
 
 ;; Functional / Miscellaneous General Settings
@@ -91,8 +95,6 @@
 ;;; Saveplace to savetime
 (require 'saveplace)
 (setq-default save-place t)
-
-
 
 ;;; C-x C-k and M-w kill/copy whole line when no region is active
 (defadvice kill-ring-save (before slick-copy activate compile)
