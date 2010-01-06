@@ -78,8 +78,11 @@
 
 
 ;;; MH-E mode
-(add-hook 'MH-Letter
-	  (lambda () (flymake-mode 1)))
+(add-hook 'mh-folder-mode-hook
+          (lambda () (setq split-height-threshold 20)))
+
+(add-hook 'mh-letter-mode-hook
+	  (lambda () (flyspell-mode 1)))
 
 ;;; Turn on display time mode for mail notification
 (setq display-time-format "")  ; don't need time string in modeline
