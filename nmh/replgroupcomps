@@ -20,7 +20,7 @@
 %;     cc              (and)
 %;     personal address
 %;
-From: andy@tx.net
+From: Andy Wilson <andy@tx.net>
 %(lit)%(formataddr{mail-followup-to})\
 %<(nonnull)%(void(width))%(putaddr To: )\n\
 %|\

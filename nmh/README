@@ -1,0 +1,11 @@
+Copy the following into <mh-dir> (default is ~/Mail):
+     components
+     forwcomps
+     replcomps
+     replgroupcomps
+
+
+This is important... see (man post)
+Edit the following variable /usr/local/etc/nmh/mts.conf:
+     masquerade: draft_from
+

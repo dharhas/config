@@ -5,7 +5,7 @@
 %;
 %; If no To:/cc:/Fcc: text, we output empty fields for prompter to fill in.
 %;
-From: andy@tx.net
+From: Andy Wilson <andy@tx.net>
 %(lit)%(formataddr{reply-to})\
 %(formataddr %<{from}%(void{from})%|%(void{apparently-from})%>)\
 %(formataddr{resent-to})\
