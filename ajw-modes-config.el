@@ -102,6 +102,10 @@
 (display-time-mode t)
 
 
+;;; Quack  mode
+(require 'quack)
+(add-hook 'scheme-mode-hook yas/minor-mode)
+
 
 
 ;;; NXML-mode
