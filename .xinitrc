@@ -26,6 +26,6 @@ fi
 
 
 # start some nice programs
-/usr/local/bin/xautolock -locker /usr/local/bin/slock -time 5 & /usr/local/bin/awesome
+/usr/local/bin/xautolock -locker /usr/local/bin/slock -time 5 -notify 10 -notifier ~/.config/awesome/lock_notify.sh & /usr/local/bin/awesome
 
 
