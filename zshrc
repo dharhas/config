@@ -29,3 +29,14 @@ setopt extendedglob
 # prompt stuff
 PROMPT='%m[%h]%# '
 
+
+# This will keep emacs TRAMP-mode from wonking out when it tries to connect
+if [[ $TERM == "dumb" ]] 
+then
+    unsetopt zle 
+    unsetopt prompt_cr
+    unsetopt prompt_subst
+    unfunction precmd
+    unfunction preexec
+    PS1='$ '
+fi
