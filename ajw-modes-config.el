@@ -77,6 +77,13 @@
 (setq tramp-default-method "ssh")
 
 
+;(add-to-list 'tramp-default-proxies-alist
+;             '(nil "\\`root\\'" "/ssh:%h:"))
+;(add-to-list 'tramp-default-proxies-alist
+;             '("\\laika\\.tx\\.net" nil nil))
+
+
+
 ;;; MH-E mode
 (add-hook 'mh-folder-mode-hook
           (lambda () (setq split-height-threshold 20)))
