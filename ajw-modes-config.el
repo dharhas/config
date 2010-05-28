@@ -109,9 +109,17 @@
 (display-time-mode t)
 
 
-;;; Quack  mode
+;;; Quack mode
 (require 'quack)
 (add-hook 'scheme-mode-hook yas/minor-mode)
+
+
+;;; Haskell mode (oooh aren't I fancy)
+(load-library "haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 
 
@@ -136,6 +144,9 @@ by using nxml's indentation rules."
       (indent-region begin end))
     (message "Ah, much better!"))
 
+
+;;; Zen coding
+(load-library "zencoding-mode.el")
 
 ;;; Ido
 (require 'ido)
