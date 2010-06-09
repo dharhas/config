@@ -13,7 +13,7 @@
 ;; should also put py-python-command-args?
 ;(setq ipython-command "c:\\Python25\\Scripts\\ipython")
 (setq ipython-command "ipython")
-(setq py-python-command-args '("-pylab" "-wthread" "-colors" "Linux" "-automagic"))
+(setq py-python-command-args '("-pylab" "-q4thread" "-colors" "Linux" "-automagic"))
 (eval-after-load "python-mode"
  '(progn
     (load-library "ipython")
