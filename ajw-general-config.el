@@ -24,6 +24,9 @@
 ;;; Send this buffer to the hinterland
 (global-set-key [f8] 'bury-buffer)
 
+;;; Auto-indent when pressing return
+(global-set-key (kbd "RET") 'newline-and-indent)
+
 ;;; So I can kill (and thus paste) text from read-only buffer
 (setq kill-read-only-ok 1)
 
