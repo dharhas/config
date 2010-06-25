@@ -8,8 +8,13 @@ require("beautiful")
 require("naughty")
 --- Widget library
 require("vicious")
+require("bashets")
 --- Shifty tag library
 --require("shifty")
+
+
+-- set to true if we want laptopy things (e.g. battery)
+laptop = true
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -24,6 +29,7 @@ beautiful.init(awful.util.getdir("config") .. "/zenburn.lua")
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
 terminal = "urxvt"
+screenlocker = "slock"
 editor = os.getenv("EDITOR") or "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -56,10 +62,10 @@ layouts =
 tags = {
     names =  {"emacs", "local", "extern", "mail", "web", 6, 7},
     layout = { awful.layout.suit.max.fullscreen, 
-               awful.layout.suit.max.fullscreen, 
                awful.layout.suit.tile, 
                awful.layout.suit.tile, 
-               awful.layout.suit.floating,
+               awful.layout.suit.max,
+               awful.layout.suit.max,
                awful.layout.suit.tile, 
                awful.layout.suit.tile, 
             }
@@ -84,7 +90,8 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "open terminal", terminal },
+                                    { "do nothing", ""}
                                   }
                         })
 
@@ -103,6 +110,19 @@ separator.text, spacer.text = "|", " "
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
 
+-- {{{ Battery state
+baticon = widget({ type = "imagebox" })
+baticon.image = image(beautiful.widget_bat)
+-- Initialize widget
+batwidget = widget({ type = "textbox" })
+-- Register widget
+bashets.register(batwidget, awful.util.getdir("config") .. "/batt.sh",'$2')
+--vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
+-- }}}
+
+bashets.start()
+
+
 -- Initialize widget
 
 dateicon = widget({ type = "imagebox" })
@@ -115,14 +135,13 @@ vicious.register(datewidget, vicious.widgets.date, "%b %d, %R", 60)
 mailicon = widget({ type = "imagebox" })
 mailicon.image = image(beautiful.widget_mail)
 
-mboxcwidget = widget({ type = 'textbox' })
-vicious.register(mboxcwidget, vicious.widgets.mboxc, "$3", 10, {'/var/mail/wilsaj'})
+--mboxcwidget = widget({ type = 'textbox' })
+--vicious.register(mboxcwidget, vicious.widgets.mboxc, "$3", 10, {'/var/mail/wilsaj'})
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
 
 -- Create a wibox for each screen and add it
-mywibox = {}
 promptbox = {}
 layoutbox = {}
 taglist = {}
@@ -195,36 +214,15 @@ for s = 1, screen.count() do
             separator,
             ["layout"] = awful.widget.layout.horizontal.leftright
         },
---        taglist[s],
         layoutbox[s],         --
 --        s == screen.count() and mysystray or nil,
         separator, datewidget,
-        separator, mboxcwidget, mailicon,
+--        separator, mboxcwidget, mailicon,
+        separator, spacer, batwidget, baticon,
         tasklist[s],
-
         ["layout"] = awful.widget.layout.horizontal.rightleft
     }
 end
-
-
---    mywibox[s] = awful.wibox({ position = "top", screen = s })
-    -- Add widgets to the wibox - order matters
---    mywibox[s].widgets = {
---        {
---            mylauncher,
---            mytaglist[s],
---            mypromptbox[s],
---            layout = awful.widget.layout.horizontal.leftright
---        },
---        mylayoutbox[s],
---        mytextclock,
---        separator, mboxwidget,
---        separator, datewidget,
---        s == 1 and mysystray or nil,
---        mytasklist[s],
---        layout = awful.widget.layout.horizontal.rightleft
---    }
--- end
 -- }}}
 
 -- {{{ Mouse bindings
@@ -251,7 +249,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show(true)        end),
+    awful.key({ modkey,           }, "Escape", function () mymainmenu:show(true)        end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -290,7 +288,10 @@ globalkeys = awful.util.table.join(
                   promptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end)
+              end),
+
+    -- Screen lock
+    awful.key({ altkey, "Control" }, "l", function () awful.util.spawn( screenlocker ) end)
 )
 
 
@@ -360,7 +361,7 @@ awful.rules.rules = {
       border_color = beautiful.border_normal }
     },
     { rule = { class = "Firefox" },
-      properties = { tag = tags[1][3] } },
+      properties = { tag = tags[1][5] } },
 }
 -- }}}
 

@@ -8,8 +8,13 @@ require("beautiful")
 require("naughty")
 --- Widget library
 require("vicious")
+require("bashets")
 --- Shifty tag library
 --require("shifty")
+
+
+-- set to true if we want laptopy things (e.g. battery)
+laptop = true
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -105,6 +110,19 @@ separator.text, spacer.text = "|", " "
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
 
+-- {{{ Battery state
+baticon = widget({ type = "imagebox" })
+baticon.image = image(beautiful.widget_bat)
+-- Initialize widget
+batwidget = widget({ type = "textbox" })
+-- Register widget
+bashets.register(batwidget, awful.util.getdir("config") .. "/batt.sh",'$2')
+--vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
+-- }}}
+
+bashets.start()
+
+
 -- Initialize widget
 
 dateicon = widget({ type = "imagebox" })
@@ -117,8 +135,8 @@ vicious.register(datewidget, vicious.widgets.date, "%b %d, %R", 60)
 mailicon = widget({ type = "imagebox" })
 mailicon.image = image(beautiful.widget_mail)
 
-mboxcwidget = widget({ type = 'textbox' })
-vicious.register(mboxcwidget, vicious.widgets.mboxc, "$3", 10, {'/var/mail/wilsaj'})
+--mboxcwidget = widget({ type = 'textbox' })
+--vicious.register(mboxcwidget, vicious.widgets.mboxc, "$3", 10, {'/var/mail/wilsaj'})
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -199,7 +217,8 @@ for s = 1, screen.count() do
         layoutbox[s],         --
 --        s == screen.count() and mysystray or nil,
         separator, datewidget,
-        separator, mboxcwidget, mailicon,
+--        separator, mboxcwidget, mailicon,
+        separator, spacer, batwidget, baticon,
         tasklist[s],
         ["layout"] = awful.widget.layout.horizontal.rightleft
     }
