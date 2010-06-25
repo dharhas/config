@@ -1,10 +1,15 @@
 #!/bin/sh
 # $Xorg: xinitrc.cpp,v 1.3 2000/08/17 19:54:30 cpqbld Exp $
 
-userresources=$HOME/.Xresources
-usermodmap=$HOME/.Xmodmap
-sysresources=/usr/local/lib/X11/xinit/.Xresources
-sysmodmap=/usr/local/lib/X11/xinit/.Xmodmap
+
+BIN_DIR=/usr/bin
+SBIN_DIR=/usr/sbin
+LIB_DIR=/usr/local/lib
+
+userresources=${HOME}/config/.Xresources
+usermodmap=${HOME}/config/.Xmodmap
+sysresources=${LIB_DIR}/X11/xinit/.Xresources
+sysmodmap=${LIB_DIR}/X11/xinit/.Xmodmap
 
 
 # merge in defaults and keymaps
@@ -26,6 +31,8 @@ fi
 
 
 # start some nice programs
-/usr/local/bin/xautolock -locker /usr/local/bin/slock -time 5 -notify 10 -notifier ~/.config/awesome/lock_notify.sh & /usr/local/bin/awesome
+${BIN_DIR}/xautolock -locker ${BIN_DIR}/slock -time 5 -notify 10 -notifier ~/.config/awesome/lock_notify.sh &
+
+${BIN_DIR}/awesome --config ~/config/.config/awesome/rc.lua
 
 
