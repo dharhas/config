@@ -79,8 +79,6 @@
 
 ;(add-to-list 'tramp-default-proxies-alist
 ;             '(nil "\\`root\\'" "/ssh:%h:"))
-;(add-to-list 'tramp-default-proxies-alist
-;             '("\\laika\\.tx\\.net" nil nil))
 
 
 
@@ -152,6 +150,10 @@ by using nxml's indentation rules."
 (require 'ido)
 (ido-mode 1)
 
+;;; Etags select mode
+(require 'etags-select)
+(global-set-key "\M-?" 'etags-select-find-tag-at-point)
+(global-set-key "\M-." 'etags-select-find-tag)
 
 
 
