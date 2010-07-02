@@ -60,12 +60,12 @@ layouts =
 
 -- Define a tag table which hold all screen tags.
 tags = {
-    names =  {"emacs", "local", "extern", "mail", "web", 6, 7},
+    names =  {"emacs", "web", "term", 4, 5, 6, 7},
     layout = { awful.layout.suit.max.fullscreen, 
+               awful.layout.suit.floating, 
                awful.layout.suit.tile, 
-               awful.layout.suit.tile, 
-               awful.layout.suit.max,
-               awful.layout.suit.max,
+               awful.layout.suit.tile,
+               awful.layout.suit.tile,
                awful.layout.suit.tile, 
                awful.layout.suit.tile, 
             }
@@ -74,6 +74,8 @@ tags = {
 for s = 1, screen.count() do
    -- Each screen has its own tag table.
   tags[s] = awful.tag(tags.names, s, tags.layout)
+  awful.tag.setproperty(tags[s][4], "hide",   true)
+  awful.tag.setproperty(tags[s][5], "hide",   true)
   awful.tag.setproperty(tags[s][6], "hide",   true)
   awful.tag.setproperty(tags[s][7], "hide",   true)  
 end
@@ -116,8 +118,8 @@ baticon.image = image(beautiful.widget_bat)
 -- Initialize widget
 batwidget = widget({ type = "textbox" })
 -- Register widget
-bashets.register(batwidget, awful.util.getdir("config") .. "/batt.sh",'$2')
---vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
+--bashets.register(batwidget, awful.util.getdir("config") .. "/batt.sh",'$2')
+vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
 -- }}}
 
 bashets.start()
@@ -361,7 +363,7 @@ awful.rules.rules = {
       border_color = beautiful.border_normal }
     },
     { rule = { class = "Firefox" },
-      properties = { tag = tags[1][5] } },
+      properties = { tag = tags[1][2] } },
 }
 -- }}}
 
