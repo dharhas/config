@@ -18,29 +18,29 @@
 
 ;;; Windows specific stuff
 (if (eq system-type 'windows-nt)
-    (load-library "ajw-winnt-config"))
+    (load-library "winnt-config"))
 
 ;;; FreeBSD specific stuff
 (if (eq system-type 'berkeley-unix)
-    (load-library "ajw-bsd-config"))
+    (load-library "bsd-config"))
 
 ;;; General stuff - keybindings, settings, etc
-(load-library "ajw-general-config")
+(load-library "general-config")
 
 ;;; How to make pretty
-(load-library "ajw-color-config")
+(load-library "color-config")
 
 ;;; Modes and their settings
-(load-library "ajw-modes-config")
+(load-library "modes-config")
 
 ;;; Org mode setup
-(load-library "ajw-org-config")
+(load-library "org-config")
 
 ;;; Python mode setup
-(load-library "ajw-python-config")
+(load-library "python-config")
 
 ;;; Autocomplete setup
-(load-library "ajw-autocomplete-config")
+(load-library "autocomplete-config")
 
 ;;; Tell me how long it took, for tuning emacs configs
 (message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
