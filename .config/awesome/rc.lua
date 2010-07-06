@@ -65,12 +65,14 @@ layouts =
 
 -- Define a tag table which hold all screen tags.
 tags = {
-    names =  {"emacs", "term", "web", 4, 5, 6, 7},
+    names =  {"emacs", "term", "web", "mail", 5, 6, 7, 8, 9},
     layout = { awful.layout.suit.max.fullscreen, 
                awful.layout.suit.tile, 
                awful.layout.suit.floating, 
+               awful.layout.suit.floating, 
                awful.layout.suit.tile,
                awful.layout.suit.tile,
+               awful.layout.suit.tile, 
                awful.layout.suit.tile, 
                awful.layout.suit.tile, 
             }
@@ -79,10 +81,11 @@ tags = {
 for s = 1, screen.count() do
    -- Each screen has its own tag table.
   tags[s] = awful.tag(tags.names, s, tags.layout)
-  awful.tag.setproperty(tags[s][4], "hide",   true)
   awful.tag.setproperty(tags[s][5], "hide",   true)
   awful.tag.setproperty(tags[s][6], "hide",   true)
   awful.tag.setproperty(tags[s][7], "hide",   true)  
+  awful.tag.setproperty(tags[s][8], "hide",   true)  
+  awful.tag.setproperty(tags[s][9], "hide",   true)  
 end
 -- }}}
 
