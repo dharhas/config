@@ -4,12 +4,24 @@
 --    License:  GNU GPL v2   --
 -------------------------------
 
-
 -- {{{ Main
 theme = {}
-theme.confdir       = awful.util.getdir("config")
+
+
+-- for linux:
+theme.sharedir = "/usr/share/"
+
+-- for freebsd:
+-- theme.sharedir = "/usr/local/share/"
+
+
+-- XXX: look into how awful.util.getdir("config") works, it's not
+--      picking up the --config param passed to awesome theme.confdir
+
+--awful.util.getdir("config")
+theme.confdir = "/home/wilsaj/config/.config/awesome/"
 --theme.wallpaper_cmd = { "/usr/bin/nitrogen --restore" }
---theme.wallpaper_cmd = { "awsetbg /home/wilsaj/config/.config/awesome/background/water_drops.jpg" }
+theme.wallpaper_cmd = { "awsetbg -c -r /home/wilsaj/config/.config/awesome/background/" }
 -- }}}
 
 
@@ -79,8 +91,8 @@ theme.taglist_squares_unsel = theme.confdir .. "/icons/taglist/squareza.png"
 
 -- {{{ Misc icons
 theme.awesome_icon           = theme.confdir .. "/icons/awesome.png"
-theme.menu_submenu_icon      = "/usr/local/share/awesome/themes/default/submenu.png"
-theme.tasklist_floating_icon = "/usr/local/share/awesome/themes/default/tasklist/floatingw.png"
+theme.menu_submenu_icon      = theme.sharedir .. "/awesome/themes/default/submenu.png"
+theme.tasklist_floating_icon = theme.sharedir .. "/awesome/themes/default/tasklist/floatingw.png"
 -- }}}
 
 -- {{{ Layout

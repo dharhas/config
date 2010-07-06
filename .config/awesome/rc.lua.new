@@ -8,23 +8,28 @@ require("beautiful")
 require("naughty")
 --- Widget library
 require("vicious")
-require("bashets")
+--require("bashets")
 --- Shifty tag library
 --require("shifty")
 
 
--- set to true if we want laptopy things (e.g. battery)
-laptop = true
+-- set to true if we want to enable laptopy things (e.g. battery widget)
+laptop = false
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 -- Zenburn is a good theme
---theme_path = "/usr/local/share/awesome/themes/zenburn/theme.lua"
+
+-- XXX: look into how awful.util.getdir("config") works, it's not
+--      picking up the --config param passed to awesome theme.confdir
+
+-- theme_path = awful.util.getdir("config") .. "/zenburn.lua"
+configdir = "/home/wilsaj/config/.config/awesome/"
+theme_path = configdir .. "zenburn.lua"
 
 -- Actually load theme
---beautiful.init(theme_path)
--- Beautiful theme
-beautiful.init(awful.util.getdir("config") .. "/zenburn.lua")
+beautiful.init(theme_path)
+
 
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
@@ -60,10 +65,10 @@ layouts =
 
 -- Define a tag table which hold all screen tags.
 tags = {
-    names =  {"emacs", "web", "term", 4, 5, 6, 7},
+    names =  {"emacs", "term", "web", 4, 5, 6, 7},
     layout = { awful.layout.suit.max.fullscreen, 
-               awful.layout.suit.floating, 
                awful.layout.suit.tile, 
+               awful.layout.suit.floating, 
                awful.layout.suit.tile,
                awful.layout.suit.tile,
                awful.layout.suit.tile, 
@@ -113,16 +118,18 @@ separator.text, spacer.text = "|", " "
 mytextclock = awful.widget.textclock({ align = "right" })
 
 -- {{{ Battery state
-baticon = widget({ type = "imagebox" })
-baticon.image = image(beautiful.widget_bat)
--- Initialize widget
-batwidget = widget({ type = "textbox" })
--- Register widget
---bashets.register(batwidget, awful.util.getdir("config") .. "/batt.sh",'$2')
-vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
+if laptop then
+   baticon = widget({ type = "imagebox" })
+   baticon.image = image(beautiful.widget_bat)
+   -- Initialize widget
+   batwidget = widget({ type = "textbox" })
+   -- Register widget
+   --bashets.register(batwidget, awful.util.getdir("config") .. "/batt.sh",'$2')
+   vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
+end
 -- }}}
 
-bashets.start()
+--bashets.start()
 
 
 -- Initialize widget
@@ -282,7 +289,18 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () promptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "F1",     function () promptbox[mouse.screen]:run() end),
+    
+
+    awful.key({ modkey }, "F4",
+              function ()
+                  awful.prompt.run({ prompt = "Run Lua code: " },
+                  promptbox[mouse.screen].widget,
+                  awful.util.eval, nil,
+                  awful.util.getdir("cache") .. "/history_eval")
+              end),
+
+    awful.key({ modkey }, "r",     function () promptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "x",
               function ()
@@ -363,7 +381,7 @@ awful.rules.rules = {
       border_color = beautiful.border_normal }
     },
     { rule = { class = "Firefox" },
-      properties = { tag = tags[1][2] } },
+      properties = { tag = tags[1][3] } },
 }
 -- }}}
 
