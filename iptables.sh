@@ -25,6 +25,9 @@ $IPT -P OUTPUT ACCEPT
 $IPT -N OPEN-TCP
 $IPT -N OPEN-UDP
 
+# add rules for chains
+#$IPT -A OPEN-TCP -p tcp --dport 22 -j ACCEPT
+
 # ----------------------------------------------------------------------------
 
 # INPUT chain
