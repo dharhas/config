@@ -1,0 +1,5 @@
+# rope files
+*.ropeproject
+
+# python compiled files
+*.pyc
