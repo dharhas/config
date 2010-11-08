@@ -122,10 +122,15 @@
 
 
 ;;; NXML-mode
-(load-library "rng-auto.el")
 (setq auto-mode-alist
       (cons '("\\.\\(xml\\|xsl\\|\\|xhtml\\)\\'" . nxml-mode)
 	    auto-mode-alist))
+
+;;; Optional: Start up nxhtml
+(load "nxhtml-autostart.el" nil t t)
+(setq mumamo-background-colors nil) 
+(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+
 
 (defun bf-pretty-print-xml-region (begin end)
   "Pretty format XML markup in region. You need to have nxml-mode
@@ -144,7 +149,8 @@ by using nxml's indentation rules."
 
 
 ;;; Zen coding
-(load-library "zencoding-mode.el")
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode)
 
 ;;; Ido
 (require 'ido)
@@ -154,6 +160,14 @@ by using nxml's indentation rules."
 (require 'etags-select)
 (global-set-key "\M-?" 'etags-select-find-tag-at-point)
 (global-set-key "\M-." 'etags-select-find-tag)
+
+
+;;; AUCTex goodness
+(load "auctex.el" nil t t)
+(load "preview-latex.el" nil t t)
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+
 
 
 
