@@ -1,42 +1,23 @@
-# .zshrc - startup file for interactive zsh shells
-#
-# Where it is placed determines who it effects:
-#   /etc/zshrc     - all users
-#   ${HOME}/.zshrc - one user
-#
+# Path to your oh-my-zsh configuration.
+export ZSH=$HOME/.oh-my-zsh
 
-bindkey -e
+# Set to the name theme to load.
+# Look in ~/.oh-my-zsh/themes/
+export ZSH_THEME="xiong-chiamiov-plus"
 
-alias h='history 25'
-alias j='jobs -l'
-alias la='ls -a'
-alias lf='ls -FA'
-alias ll='ls -lAF'
+# Set to this to use case-sensitive completion
+# export CASE_SENSITIVE="true"
 
-# righteous umask <+|:o-|-<
-umask 022
+# Comment this out to disable weekly auto-update checks
+# export DISABLE_AUTO_UPDATE="true"
 
-# Set up path to include all bin dirs
-path=(/sbin /bin /usr/sbin /usr/bin /usr/games /usr/local/sbin /usr/local/bin $HOME/bin)
+# Uncomment following line if you want to disable colors in ls
+# export DISABLE_LS_COLORS="true"
 
-# let's see some color
-CLICOLOR=1
-export CLICOLOR
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git)
 
-# Extended glob 
-setopt extendedglob
+source $ZSH/oh-my-zsh.sh
 
-# prompt stuff
-PROMPT='%m[%h]%# '
-
-
-# This will keep emacs TRAMP-mode from wonking out when it tries to connect
-if [[ $TERM == "dumb" ]] 
-then
-    unsetopt zle 
-    unsetopt prompt_cr
-    unsetopt prompt_subst
-    unfunction precmd
-    unfunction preexec
-    PS1='$ '
-fi
+# Customize to your needs...
