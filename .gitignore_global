@@ -3,3 +3,9 @@
 
 # python compiled files
 *.pyc
+
+# emacs junk
+\#*\#
+
+# project specific
+flaskiki.db
