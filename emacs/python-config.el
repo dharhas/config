@@ -10,6 +10,9 @@
 (setq py-python-command "/usr/bin/python2")
 (setenv "PYMACS_PYTHON" "/usr/bin/python2")
 
+;;; Load virtualenv.el
+(load-library "virtualenv")
+
 ;;; ipython
 ;;; XXX: for global .emacs file: seperate out the pylab backend args
 ;;;      (e.g. -wthread) per OS
