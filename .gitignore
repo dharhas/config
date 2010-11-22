@@ -1,5 +1,9 @@
-
 # ignore ipython history and log files
 .ipython/db
 .ipython/log
 .ipython/history
+
+# ignore local config directories
+.config/Trolltech.conf
+.config/chromium/
+.config/gtk-2.0/
