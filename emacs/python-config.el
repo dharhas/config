@@ -1,17 +1,17 @@
-;;; python mode...
+;;; python mode
 ;;; XXX: make this and the rest of python stuff lazy load
 ;;;      when .emacs init is generalized for Win + UNIX
 (autoload 'python-mode "python-mode" "Python Mode." t)
-(autoload 'cython-mode "cython-mode" "Cython Mode." t)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
+
+;;; cython mode
+(autoload 'cython-mode "cython-mode" "Cython Mode." t)
+(add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
 
 ;;; set python path explicitly to python2 for now
 (setq py-python-command "/usr/bin/python2")
 (setenv "PYMACS_PYTHON" "/usr/bin/python2")
-
-;;; Load virtualenv.el
-(load-library "virtualenv")
 
 ;;; ipython
 ;;; XXX: for global .emacs file: seperate out the pylab backend args
@@ -23,6 +23,13 @@
 (load-library "ipython")
 (setq py-python-command-args '("--pylab" "qt" "--automagic"))
 
+;; set IPYTHONDIR directly, as it isn't automatically inferred by
+;; emacs from the shell environment
+(setenv "IPYTHONDIR" (concat config-root "/.ipython/"))
+
+
+;;; Load virtualenv.el
+(load-library "virtualenv")
 
 ;;; Pymacs
 (autoload 'pymacs-apply "pymacs")

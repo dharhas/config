@@ -1,9 +1,12 @@
 (defvar *emacs-load-start* (current-time))
 
-(defvar emacs-root (if (eq system-type 'windows-nt) 
-                       "C:/andy/config/emacs"
-                       "/home/wilsaj/config/emacs")
-        "My emacs home directory")
+(defvar config-root (if (eq system-type 'windows-nt) 
+                       "C:/andy/config/"
+                       "/home/wilsaj/config/")
+        "My general configuration home directory")
+
+(defvar emacs-root (concat config-root "emacs")
+        "My emacs configuration home directory")
 
 
 ;;; Emacs Load Path
