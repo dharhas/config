@@ -7,5 +7,8 @@
 # emacs junk
 \#*\#
 
+# elisp compiled files
+*.elc
+
 # project specific
 flaskiki.db
