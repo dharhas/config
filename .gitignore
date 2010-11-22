@@ -1,0 +1,5 @@
+
+# ignore ipython history and log files
+.ipython/db
+.ipython/log
+.ipython/history
