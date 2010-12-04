@@ -19,14 +19,6 @@
 
 (add-to-list 'load-path emacs-root)
 
-;;; Windows specific stuff
-(if (eq system-type 'windows-nt)
-    (load-library "winnt-config"))
-
-;;; FreeBSD specific stuff
-(if (eq system-type 'berkeley-unix)
-    (load-library "bsd-config"))
-
 ;;; General stuff - keybindings, settings, etc
 (load-library "general-config")
 
@@ -44,6 +36,10 @@
 
 ;;; Autocomplete setup
 (load-library "autocomplete-config")
+
+;;; Windows specific stuff
+(if (eq system-type 'windows-nt)
+    (load-library "winnt-config"))
 
 ;;; Tell me how long it took, for tuning emacs configs
 (message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
