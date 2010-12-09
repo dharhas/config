@@ -292,6 +292,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "k", function () switch_screen(-1) end),
     awful.key({ modkey, "Control" }, "Right", function () switch_screen( 1) end),
     awful.key({ modkey, "Control" }, "Left",  function () switch_screen(-1) end),
+    awful.key({ altkey, "Control" }, "Right", function () switch_screen( 1) end),
+    awful.key({ altkey, "Control" }, "Left",  function () switch_screen(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
