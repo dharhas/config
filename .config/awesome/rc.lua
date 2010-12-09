@@ -83,11 +83,33 @@ for s = 1, screen.count() do
   tags[s] = awful.tag(tags.names, s, tags.layout)
   awful.tag.setproperty(tags[s][5], "hide",   true)
   awful.tag.setproperty(tags[s][6], "hide",   true)
-  awful.tag.setproperty(tags[s][7], "hide",   true)  
-  awful.tag.setproperty(tags[s][8], "hide",   true)  
-  awful.tag.setproperty(tags[s][9], "hide",   true)  
+  awful.tag.setproperty(tags[s][7], "hide",   true)
+  awful.tag.setproperty(tags[s][8], "hide",   true)
+  awful.tag.setproperty(tags[s][9], "hide",   true)
 end
 -- }}}
+
+
+-- {{{ Special functions
+-- move mouse to one of the corners
+function mouse_to_corner(corner)
+   local screen_index = mouse.screen
+   local geometry = screen[mouse.screen].geometry
+
+   if     corner == 'ul' then mouse.coords({ x=geometry.x+1,                    y=geometry.y+1})
+   elseif corner == 'ur' then mouse.coords({ x=screen_index * geometry.width-1, y=geometry.y+1})
+   elseif corner == 'bl' then mouse.coords({ x=geometry.x+1,                    y= geometry.height-1})
+   elseif corner == 'br' then mouse.coords({ x=screen_index * geometry.width-1, y= geometry.height-1})
+   end
+end
+
+-- Run focus_relative, but move mouse to bottom right corner afterward
+function switch_screen(relative_jump)
+    awful.screen.focus_relative(relative_jump)
+    mouse_to_corner('br')
+end
+-- }}}
+
 
 
 -- {{{ Menu
@@ -266,8 +288,10 @@ globalkeys = awful.util.table.join(
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Control" }, "j", function () switch_screen( 1) end),
+    awful.key({ modkey, "Control" }, "k", function () switch_screen(-1) end),
+    awful.key({ modkey, "Control" }, "Right", function () switch_screen( 1) end),
+    awful.key({ modkey, "Control" }, "Left",  function () switch_screen(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -293,8 +317,8 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey }, "F1",     function () promptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "r",      function () promptbox[mouse.screen]:run() end),
     
-
     awful.key({ modkey }, "F4",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
@@ -302,8 +326,6 @@ globalkeys = awful.util.table.join(
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
               end),
-
-    awful.key({ modkey }, "r",     function () promptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "x",
               function ()
@@ -314,7 +336,10 @@ globalkeys = awful.util.table.join(
               end),
 
     -- Screen lock
-    awful.key({ altkey, "Control" }, "l", function () awful.util.spawn( screenlocker ) end)
+    awful.key({ altkey, "Control" }, "l", function () awful.util.spawn(screenlocker) end),
+
+    -- Get mouse out of the way
+    awful.key({ modkey,  }, "BackSpace", function () mouse_to_corner('br') end)
 )
 
 
@@ -383,8 +408,6 @@ awful.rules.rules = {
       border_width = beautiful.border_width,
       border_color = beautiful.border_normal }
     },
-    { rule = { class = "Firefox" },
-      properties = { tag = tags[1][3] } },
 }
 -- }}}
 
