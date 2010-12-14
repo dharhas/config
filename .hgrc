@@ -1,6 +1,6 @@
 # Mercurial config file
 [ui]
-username = Andy Wilson <andy@tx.net>
+username = Andy Wilson <andrew.wilson@twdb.state.tx.us>
 [extensions]
 hgext.convert=
 hgext.graphlog=
