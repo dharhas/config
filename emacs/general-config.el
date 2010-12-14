@@ -27,13 +27,17 @@
 ;;; Auto-indent when pressing return
 (global-set-key (kbd "RET") 'newline-and-indent)
 
-;;; So I can kill (and thus paste) text from read-only buffer
-(setq kill-read-only-ok 1)
+;;; A virtual env keybinding
+(global-set-key "\C-c\C-v" 'virtualenv-workon)
 
-
+;;; Bind to magit
+(global-set-key "\C-c\C-g" 'magit-status)
 
 
 ;; Variables
+
+;;; So I can kill (and thus paste) text from read-only buffer
+(setq kill-read-only-ok 1)
 
 ;;; Use spaces rather than tabs
 (setq-default indent-tabs-mode nil)
@@ -114,3 +118,7 @@
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
+
+
+
+
