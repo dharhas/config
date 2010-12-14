@@ -168,7 +168,8 @@ by using nxml's indentation rules."
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 
-
+;;; Magit
+(require 'magit)
 
 
 
