@@ -2,3 +2,4 @@
 syntax: regexp
 
 # ignored files go here
+.ropeproject
