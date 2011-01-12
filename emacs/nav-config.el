@@ -1,0 +1,2 @@
+;;; nav mode
+(require 'nav)

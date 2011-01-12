@@ -25,19 +25,86 @@
 ;;; How to make pretty
 (load-library "color-config")
 
-;;; Modes and their settings
-(load-library "modes-config")
 
-;;; Org mode setup
-(load-library "org-config")
+;------------ mode configuration -------------------------------------
 
-;;; Python mode setup
-(load-library "python-config")
+;;; yasnippets - super handy general templating
+;;;   note: other config files depend on yasnippet being initialized
+(load-library "yasnippet-config")
 
-;;; Autocomplete setup
+;;; ahg for mercurial version control
+(load-library "ahg-config")
+
+;;; autocomplete setup
 (load-library "autocomplete-config")
 
-;;; Windows specific stuff
+;;; auctex for latex editting
+(load-library "auctex-config")
+
+;;; django template editing
+(load-library "django-config")
+
+;;; etags select mode for code navigation
+(load-library "etags-config")
+
+;;; flyspell for on-the-fly spellchecking
+(load-library "flyspell-config")
+
+;;; irfc mode for reading RFC's
+;; note: you will need to createa a ~/.emacs.d/RFC directory for
+;;       caching RFCs
+(load-library "irfc-config")
+
+;;; haskell language editting
+(load-library "haskell-config")
+
+;;; ido completion
+(load-library "ido-config")
+
+;;; javascript editting
+(load-library "js-config")
+
+;; lua programming language
+(load-library "lua-config")
+
+;;; nav mode; also look into speedbar for use on windowed systems
+(load-library "nav-config")
+
+;;; Magit for git version control
+(load-library "magit-config")
+
+;;; MH-E mode for email
+(load-library "mhe-config")
+
+;;; NXML for editting xml (and html)
+(load-library "nxml-config")
+
+;;; org mode setup
+(load-library "org-config")
+
+;;; python mode setup
+(load-library "python-config")
+
+;;; scheme language editting
+(load-library "scheme-config")
+
+;;; sh script editting
+(load-library "sh-config")
+
+;;; tramp for remote access
+(load-library "tramp-config")
+
+;;; uniquify makes duplicate buffer names something useful, rather
+;;; than buffername<n>
+(load-library "uniquify-config")
+
+;;; zen coding for html wizardry
+(load-library "zen-config")
+
+;------------ end mode configuration ---------------------------------
+
+
+;;; windows specific stuff
 (if (eq system-type 'windows-nt)
     (load-library "winnt-config"))
 

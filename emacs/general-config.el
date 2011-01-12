@@ -1,10 +1,12 @@
-;;; General config stuff goes here - setting up keybindings and useful variables and that sort of stuff
+;;; General config stuff goes here - setting up keybindings and useful
+;;; variables and that sort of stuff
 
 
 ;; Keybindings 
 
 ;;; C-x C-m = M-x
 (global-set-key "\C-x\C-m" 'execute-extended-command)
+;;; in case I typo C-x C-m
 (global-set-key "\C-c\C-m" 'execute-extended-command)
 
 ;;; Backward kill-word = awesome
@@ -118,7 +120,5 @@
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
-
-
 
 
