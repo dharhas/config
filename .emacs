@@ -2,7 +2,7 @@
 
 (defvar config-root (if (eq system-type 'windows-nt) 
                        "C:/andy/config/"
-                       "/home/wilsaj/config/")
+                       "~dharhas/config/")
         "My general configuration home directory")
 
 (defvar emacs-root (concat config-root "emacs")
@@ -33,27 +33,27 @@
 (load-library "yasnippet-config")
 
 ;;; ahg for mercurial version control
-(load-library "ahg-config")
+;(load-library "ahg-config")
 
 ;;; autocomplete setup
 (load-library "autocomplete-config")
 
 ;;; auctex for latex editting
-(load-library "auctex-config")
+;(load-library "auctex-config")
 
 ;;; django template editing
-(load-library "django-config")
+;(load-library "django-config")
 
 ;;; etags select mode for code navigation
-(load-library "etags-config")
+;(load-library "etags-config")
 
 ;;; flyspell for on-the-fly spellchecking
-(load-library "flyspell-config")
+;(load-library "flyspell-config")
 
 ;;; irfc mode for reading RFC's
 ;; note: you will need to createa a ~/.emacs.d/RFC directory for
 ;;       caching RFCs
-(load-library "irfc-config")
+;(load-library "irfc-config")
 
 ;;; haskell language editting
 (load-library "haskell-config")
